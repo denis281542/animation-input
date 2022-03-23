@@ -9,6 +9,7 @@ const App = () => {
         label="Название"
         name="input"
         value=""
+        error="Ошибка"
       />
     
     </div>

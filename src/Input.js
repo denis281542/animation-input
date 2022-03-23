@@ -4,14 +4,27 @@ import './app.css'
 export const Input = props => {
     const [value, setValue] = useState('')
     const [focus, setFocus] = useState(false)
+    const [error, setError] = useState(false)
 
     var labelClass = 'label';
+    var errorClass = 'error';
 
     const onChange = e => setValue(e.target.value)
-    const onFocus = () => setFocus(true);
-    const onBlur = () => {if(value.length === 0) setFocus(false)};
+
+    const onFocus = () => {
+        setFocus(true)
+        setError(false)
+    };
+
+    const onBlur = () => {
+        if(value.length === 0) {
+            setFocus(false)
+            setError(true)
+        }
+    };
 
     if(focus) labelClass += ' label--active'
+    if(error) errorClass += ' error--active'
 
     return(
         <div className="wrapper">
@@ -30,6 +43,9 @@ export const Input = props => {
                 onBlur={onBlur}
                 className="input"
             />
+            <span
+                className={errorClass}
+            >{props.error}</span>
         </div>
     )
 }
