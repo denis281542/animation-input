@@ -5,9 +5,11 @@ export const Input = props => {
     const [value, setValue] = useState('')
     const [focus, setFocus] = useState(false)
     const [error, setError] = useState(false)
+    const [errorText, setErrorText] = useState('')
 
     var labelClass = 'label';
     var errorClass = 'error';
+    var inputClass = 'input';
 
     const onChange = e => setValue(e.target.value)
 
@@ -20,11 +22,19 @@ export const Input = props => {
         if(value.length === 0) {
             setFocus(false)
             setError(true)
+            setErrorText('Ошибка. Пустое поле')
+        }
+
+        if(value.length != 0 && value.length <= 2) {
+            // setFocus(false)
+            setError(true)
+            setErrorText('Ошибка валидации')
         }
     };
 
     if(focus) labelClass += ' label--active'
     if(error) errorClass += ' error--active'
+    if(error) inputClass += ' input--error'
 
     return(
         <div className="wrapper">
@@ -41,11 +51,11 @@ export const Input = props => {
                 onChange={onChange}
                 onFocus={onFocus}
                 onBlur={onBlur}
-                className="input"
+                className={inputClass}
             />
             <span
                 className={errorClass}
-            >{props.error}</span>
+            >{errorText}</span>
         </div>
     )
 }

@@ -33,6 +33,11 @@
     width: 200px;
 }
 
+.input--error {
+    border: 1px solid tomato;
+
+}
+
 .error {
     position: absolute;
     bottom: -0;
